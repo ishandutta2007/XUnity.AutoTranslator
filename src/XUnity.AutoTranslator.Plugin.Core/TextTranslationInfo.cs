@@ -144,7 +144,11 @@ namespace XUnity.AutoTranslator.Plugin.Core
 
                if( oldMaterial != null && newMaterial != null )
                {
-                  if( !_FontMaterialCopies.TryGetValue( oldMaterial, out var copyMaterial ) )
+                  if( !_FontMaterialCopies.TryGetValue( oldMaterial, out var copyMaterial )
+                  #if IL2CPP
+                     || copyMaterial.m_CachedPtr == IntPtr.Zero
+                  #endif
+                  )
                   {
                      copyMaterial = _FontMaterialCopies[ oldMaterial ] = UnityEngine.Object.Instantiate( oldMaterial );
 
